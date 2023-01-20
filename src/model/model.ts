@@ -8,7 +8,7 @@ export class Model {
   database: Sequelize;
 
   constructor(database_Param: Sequelize) {
-    this,this.database = database_Param;  
+    this.database = database_Param;  
   };
 
 };
