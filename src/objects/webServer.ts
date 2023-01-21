@@ -22,7 +22,7 @@ export class WebServer {
     this.routes = [];
   };
 
-  get_context(): express.Application {
+  getContext(): express.Application {
     return this.app;
   }; 
 
