@@ -1,29 +1,29 @@
-import {Sequelize} from "sequelize";
+import {Sequelize, DataTypes, ModelAttributes, ModelCtor, ModelStatic, Model} from "sequelize";
 import {DatabaseContextManager} from "./databaseContextManager";
 
 import * as config from "../../config.json";
 
-export class ModelFactory {
+export class SequelizeInterface {
 
-  private static instance: ModelFactory | undefined;
+  private static instance: SequelizeInterface | undefined;
 
   private databaseContextManager: DatabaseContextManager;
-  private testDatabase: Sequelize | undefined;
+  private database: Sequelize | undefined;
 
   private constructor() {
     this.databaseContextManager = DatabaseContextManager.getInstance();
   };
 
-  public static getInstance(): ModelFactory {
+  public static getInstance(): SequelizeInterface {
 
-    if (ModelFactory.instance == undefined) {
-      ModelFactory.instance = new ModelFactory();
+    if (SequelizeInterface.instance == undefined) {
+      SequelizeInterface.instance = new SequelizeInterface();
     };
 
-    return ModelFactory.instance;
+    return SequelizeInterface.instance;
   };
 
-  public initializeDatabaseContext(): ModelFactory {
+  public initializeDatabaseContext(): Sequelize {
     
     this.databaseContextManager
       .configureDialect(config.database.dialect)
@@ -34,14 +34,8 @@ export class ModelFactory {
         config.database.authentication.db_password
       );
 
-    this.testDatabase = this.databaseContextManager.createCtx();
+    this.database = this.databaseContextManager.createCtx();
     
-    return this;
+    return this.database;
   };
-
-  public newModel(): ModelFactory {
-    return this;
-  };
-
-
 };

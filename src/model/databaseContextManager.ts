@@ -1,8 +1,9 @@
 import { Sequelize } from "sequelize";
 
 // SQLite3
-import sqlite3 from "sqlite3";
+import sqlite3, { Database } from "sqlite3";
 import { open } from 'sqlite';
+
 
 // https://sequelize.org/docs/v6/other-topics/dialect-specific-things/
 
@@ -72,7 +73,7 @@ export class DatabaseContextManager {
 
     if (this.contextCreated) throw (new Error(`Context already created for ${this.database} database`));
 
-    this.preconfigureDatabase();
+    this.configureDatabase();
 
     this.sequelizeCtx = new Sequelize(
       this.database, 
@@ -109,22 +110,41 @@ export class DatabaseContextManager {
     return options;
   };
 
-  private preconfigureDatabase(): void {
+  private configureDatabase(): void {
+    
+    let db = new sqlite3.Database(this.databasePath);
+
     switch (this.dialect) {
 
       case "sqlite": {
 
-        let connection = (async () => {
-          await open({
-            filename: this.databasePath,
-            driver: sqlite3.Database
-          });
-        });
+        const fs = require('fs');
+
+        try {
+          fs.mkdirSync(`${process.cwd()}/data`);
+        } catch (error) {};
+
+        let files = fs.readdirSync(`${process.cwd()}/data`);
+
+        let fileExits = false;
+        for (let index of files) {
+          if (index == `${this.database}.db`) fileExits = true;
+        };
+
+        if (!fileExits) {
+
+          console.log(`Creating sqlite database file: ${process.cwd()}\\data\\${this.database}.db`);
+
+          let db: Database | null;
+  
+          db = new sqlite3.Database(this.databasePath);
+          db = null;
+        };
 
         break;
-      };
-
+      }; 
     };
+
   };
 
 
