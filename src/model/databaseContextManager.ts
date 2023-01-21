@@ -2,13 +2,8 @@ import { Sequelize } from "sequelize";
 
 // SQLite3
 import sqlite3, { Database } from "sqlite3";
-import { open } from 'sqlite';
-
 
 // https://sequelize.org/docs/v6/other-topics/dialect-specific-things/
-
-// Reference this
-// https://www.atdatabases.org/blog/2021/02/03/create-sqlite-database
 
 export class DatabaseContextManager {
 

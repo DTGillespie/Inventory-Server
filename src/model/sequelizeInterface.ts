@@ -1,4 +1,4 @@
-import {Sequelize, DataTypes, ModelAttributes, ModelCtor, ModelStatic, Model} from "sequelize";
+import {Sequelize} from "sequelize";
 import {DatabaseContextManager} from "./databaseContextManager";
 
 import * as config from "../../config.json";
