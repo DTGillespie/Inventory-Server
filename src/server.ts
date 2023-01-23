@@ -9,15 +9,15 @@ export class Server {
 
     const port = "27683";
     const app: Express = express();
-    Server.initializeExpress(port, app);
-  
+    
     const sequelizeInterface = SequelizeInterface.getInstance();
     const sequelize = sequelizeInterface.initializeDatabaseContext();
-
     Server.initializeDefaultModels(sequelize);
+
+    Server.initializeExpress(port, app, sequelize);
   };
 
-  private static initializeExpress(port: string, app: Express): void {
+  private static initializeExpress(port: string, app: Express, sequelize: Sequelize): void {
 
     const path = require("path");
     
@@ -26,9 +26,38 @@ export class Server {
       res.sendFile(path.resolve(`${process.cwd()}/angular-frontend/dist/angular-frontend/index.html`));
     });
 
+    Server.defineExtendedRouting(app, sequelize);
+
     app.listen(port, () => {
       console.log(`Express listening on port: ${port}`);
     });
+  };
+
+  private static defineExtendedRouting(app: Express, sequelize: Sequelize): void {
+
+    // Prototyping Routes
+    app
+
+    // Create Table // NOT WORKING
+      .get('create-table', (req, res) => {
+        sequelize
+          .define(
+            "instances",
+            {
+              instanceId: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true
+              },
+              instanceName: {
+                type: DataTypes.STRING,
+                allowNull: false
+              }
+            }
+          )
+          .sync();
+      });
   };
 
   private static initializeDefaultModels(sequelize: Sequelize): void {
