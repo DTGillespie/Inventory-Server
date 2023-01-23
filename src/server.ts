@@ -2,12 +2,13 @@ import { SequelizeInterface } from "./model/sequelizeInterface";
 import { DataTypes, Sequelize } from "sequelize";
 import express from "express";
 import { Express } from "express";
+import bodyParser from "body-parser";
 
 export class Server {
 
   public static main(): void {
 
-    const port = "27683";
+    const port = "37561";
     const app: Express = express();
     
     const sequelizeInterface = SequelizeInterface.getInstance();
@@ -22,37 +23,41 @@ export class Server {
     const path = require("path");
     
     app.use(express.static(`${process.cwd()}/angular-frontend/dist/angular-frontend`));
-    app.get('*', (req, res) => {
+    app.get('/app/*', (req, res) => {
       res.sendFile(path.resolve(`${process.cwd()}/angular-frontend/dist/angular-frontend/index.html`));
     });
 
-    Server.defineExtendedRouting(app, sequelize);
+    Server.defineExtendedRouting(port, app, sequelize);
 
     app.listen(port, () => {
-      console.log(`Express listening on port: ${port}`);
+      console.log(`Frontend listening on port: ${port}`);
     });
   };
 
-  private static defineExtendedRouting(app: Express, sequelize: Sequelize): void {
+  private static defineExtendedRouting(port: string, app: Express, sequelize: Sequelize): void {
+
+    const urlEncodedParser = bodyParser.urlencoded({extended: false});
 
     // Prototyping Routes
     app
+      //.use(bodyParser.json())
 
-    // Create Table // NOT WORKING
-      .get('create-table', (req, res) => {
+      .get('/request/create-table', urlEncodedParser, (req, res) => {
+
+        console.log(req.body);
+        console.log(req.query);
+
+        res.send(req.query);
+        
         sequelize
           .define(
-            "instances",
+            "testCreateTable",
             {
-              instanceId: {
+              "test": {
                 type: DataTypes.INTEGER,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true
-              },
-              instanceName: {
-                type: DataTypes.STRING,
-                allowNull: false
               }
             }
           )
