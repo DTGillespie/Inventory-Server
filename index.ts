@@ -1,3 +1,3 @@
-import {global_init} from "./src/init";
+import {Server} from "./src/server";
 
-global_init();
+Server.main();
