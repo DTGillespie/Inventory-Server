@@ -3,24 +3,6 @@
 /* References
 /* https://getbootstrap.com/docs/5.0/utilities/colors/ */
 
-.navbar-medium {
-  background-color: #dee2e6;
-  box-shadow: 0px 7.5px 10px #adb5bd;
-}
-
-.navbar-button-medium {
-  box-shadow: 0px 0px 10px #adb5bd;
-  height: 75%;
-  color: #adb5bd;
-  background-color: #dee2e6;
-  border: 3px solid #dee2e6;
-  border-radius: 14px;
-  font-size: 24px;
-  font-weight: 300;
-  margin: 0.5rem;
-  margin-left: 1rem;
-}
-
 /* Grayscale Colors */
 .gray-100 { /* Lightest */
   color: #f8f9fa;
@@ -61,3 +43,6 @@
 .gray-900 { /* Dark */
   color: #212529;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
