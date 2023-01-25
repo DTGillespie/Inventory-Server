@@ -1,7 +1,22 @@
-<mat-toolbar></mat-toolbar>
 
-<body>
-  <div class="dashboard-body">
-    <p>Body</p>
+    
+  <div>
+    <mat-drawer-container class="fit-view dashboard-main-theme-grayscale" autosize>
+  
+      <mat-toolbar class="navbar-grayscale">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="spacer"></span>
+      </mat-toolbar>
+      
+      <mat-drawer #drawer class="menu menu-theme-grayscale" mode="side">
+        <div class="menu-content menu">
+          <p>Menu</p>
+        </div>
+      </mat-drawer>
+      
+      <router-outlet></router-outlet>
+  
+    </mat-drawer-container>
   </div>
-</body>
