@@ -9,10 +9,22 @@
         </button>
         <span class="spacer"></span>
       </mat-toolbar>
+
       
-      <mat-drawer #drawer class="menu menu-theme-grayscale" mode="side">
-        <div class="menu-content menu">
-          <p>Menu</p>
+      <mat-drawer #drawer class="menu-theme-grayscale" mode="side">
+        <div class="menu-content">
+          <mat-list style="padding-bottom:45vh">
+            <mat-list-item style="font-weight:bold">Dashboard</mat-list-item>
+            <mat-divider class="divider-shadow"></mat-divider>
+            <mat-list-item>Inventory</mat-list-item>
+            <mat-divider class="divider-shadow"></mat-divider>
+            <mat-list-item>Products</mat-list-item>
+            <mat-divider class="divider-shadow"></mat-divider>
+            <mat-list-item>Reporting</mat-list-item>
+            <mat-divider class="divider-shadow"></mat-divider>
+            <mat-list-item>Administration</mat-list-item>
+            <mat-divider class="divider-shadow"></mat-divider>
+          </mat-list >
         </div>
       </mat-drawer>
       
