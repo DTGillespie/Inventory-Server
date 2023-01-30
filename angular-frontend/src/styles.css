@@ -1,9 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* Card */
+
+.card {
+  height:86%; margin: 20px
+}
+
 /* Menu */
 
 .divider-shadow {
-  box-shadow: 0px 1.5px 5px #adb5bd;
+  box-shadow: 0px 0x 5px #adb5bd;
 }
 
 .menu-content {
@@ -13,62 +19,55 @@
   justify-content: flex-start;
 }
 
-.menu {
-  padding: 20px;
-}
-
 /* Grayscale Theme */
 
-.navbar-grayscale {
-  /* offset-x | offset-y | blur-radius | spread-radius | color */
-  box-shadow: 0px 2.5px 10px #6c757d;
+.grayscale-theme-primary {
   background-color: #ced4da;
-  /*background: linear-gradient(to right, #adb5bd, #ced4da);*/
+}
 
+.grayscale-theme-secondary-light {
+  background-color: #e9ecef;
+}
+
+.grayscale-theme-secondary-dark {
+  background-color: #adb5bd;
+}
+
+.navbar {
+  box-shadow: 0px 2.5px 10px #6c757d;
+}
+
+.menu {
+  box-shadow: 2.5px 0px 10px #6c757d;
 }
 
 .fit-view {
   height:100vh;
 }
 
-.dashboard-main-theme-grayscale {
-  /*background-color: #e9ecef;*/
-  /*background-color: #dee2e6;*/
-  /*background: linear-gradient(to right, #adb5bd, #dee2e6);*/
-  background: linear-gradient(to right, #ced4da, #e9ecef);
-  
-}
-
-.menu-theme-grayscale {
-  box-shadow: 2.5px 0px 10px #6c757d;
-  background-color: #adb5bd;
-  background: linear-gradient(to right, #dee2e6, #ced4da);
-}
-
 /* Colors */
 
-.gray-100 { /* Lightest */
+.gray-100 { 
   color: #f8f9fa;
 }
 
-.gray-200{ /* Primary Light */
+.gray-200{ 
   color: #e9ecef;
 }
 
-.gray-300 { /* Primary */
+.gray-300 { 
   color: #dee2e6;
 }
 
-
-.gray-400 { /* Secondary */
+.gray-400 { 
   color: #ced4da; 
 }
 
-.gray-500 { /* Secondary Dark */
+.gray-500 { 
   color: #adb5bd; 
 }
 
-.gray-600 { /* Dark */
+.gray-600 { 
   color: #6c757d;
 }
 
@@ -80,7 +79,7 @@
   color: #343a40;
 }
 
-.gray-900 { /* Darkest */
+.gray-900 { 
   color: #212529;
 }
 

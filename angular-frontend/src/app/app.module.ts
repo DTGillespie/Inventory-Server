@@ -8,11 +8,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Angular Material
 import { MaterialModule } from './material/material.module';
+import { InventoryComponent } from './components/inventory/inventory.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    InventoryComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

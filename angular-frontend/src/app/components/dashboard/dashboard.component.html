@@ -1,28 +1,21 @@
 
     
   <div>
-    <mat-drawer-container class="fit-view dashboard-main-theme-grayscale" autosize>
+    <mat-drawer-container class="fit-view grayscale-theme-secondary-light" autosize>
   
-      <mat-toolbar class="navbar-grayscale">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
+      <mat-toolbar class="navbar grayscale-theme-primary">
+        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="toggleMenu()">
           <mat-icon>menu</mat-icon>
         </button>
         <span class="spacer"></span>
       </mat-toolbar>
-
       
-      <mat-drawer #drawer class="menu-theme-grayscale" mode="side">
+      <mat-drawer #menu class="menu grayscale-theme-primary" mode="side">
         <div class="menu-content">
-          <mat-list style="padding-bottom:45vh">
-            <mat-list-item style="font-weight:bold">Dashboard</mat-list-item>
+          <mat-list style="padding-bottom:45vh;">
+            <mat-list-item id="homeButtonElement" (click)="routeHomeView()">Home</mat-list-item>
             <mat-divider class="divider-shadow"></mat-divider>
-            <mat-list-item>Inventory</mat-list-item>
-            <mat-divider class="divider-shadow"></mat-divider>
-            <mat-list-item>Products</mat-list-item>
-            <mat-divider class="divider-shadow"></mat-divider>
-            <mat-list-item>Reporting</mat-list-item>
-            <mat-divider class="divider-shadow"></mat-divider>
-            <mat-list-item>Administration</mat-list-item>
+            <mat-list-item id="inventoryButtonElement" (click)="routeInventoryView()">Inventory</mat-list-item>
             <mat-divider class="divider-shadow"></mat-divider>
           </mat-list >
         </div>

@@ -70,15 +70,15 @@ export class Server {
     sequelize
 
       .define(
-        "instances",
+        "inventoryInstances",
         {
-          instanceId: {
+          id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             autoIncrement: true,
             primaryKey: true
           },
-          instanceName: {
+          name: {
             type: DataTypes.STRING,
             allowNull: false
           }
