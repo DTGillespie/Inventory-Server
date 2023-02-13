@@ -30,27 +30,23 @@ export class Server {
     Server.defineExtendedRouting(port, app, sequelize);
 
     app.listen(port, () => {
-      console.log(`Server listening on port: ${port}\n\r`);
+      console.log(`\nServer listening on port: ${port}\n\r`);
     });
   };
 
   private static defineExtendedRouting(port: string, app: Express, sequelize: Sequelize): void {
 
-    const urlEncodedParser = bodyParser.urlencoded({extended: false});
-
     app
       .use(bodyParser.json())
+      .use(bodyParser.urlencoded({extended: false}))
 
-      .post('/request/create-table', urlEncodedParser, (req, res) => {
+      .post('/request/create-table', (req, res) => {
 
-        console.log(req.body);
-        console.log(req.query);
+        let data = req.body;
 
-        res.send(req.query);
-        
         sequelize
           .define(
-            "testCreateTable",
+            data.tableName,
             {
               "test": {
                 type: DataTypes.INTEGER,
@@ -58,9 +54,15 @@ export class Server {
                 autoIncrement: true,
                 primaryKey: true
               }
+            },
+            {
+              freezeTableName: true,
+              underscored: true,
             }
           )
           .sync();
+
+          res.send(`POST request successful`);
       });
   };
 

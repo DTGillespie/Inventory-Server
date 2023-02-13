@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import axios from 'axios';
 
 @Component({
   selector: 'app-inventory',
@@ -16,7 +15,7 @@ export class InventoryComponent implements OnInit{
   };
 
   async createDatabaseInstance(): Promise<any> {
-    let result = await axios.post(`http://localhost:37561/request/create-table`, {test: "test"});
+    
   };
 
 
