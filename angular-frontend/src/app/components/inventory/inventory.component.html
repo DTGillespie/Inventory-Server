@@ -1,23 +1,18 @@
-<mat-accordion>
 
-  <div>
-    <mat-card id="card" class="card grayscale-theme-primary">
-      <mat-card-content>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Inventory Instances
-            </mat-panel-title>
-            <mat-panel-description style="font-style: italic">
-              Create & manage inventory database instances
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>This is the primary content of the panel.</p>
-        </mat-expansion-panel>
-      </mat-card-content>
-    </mat-card>
-  </div>
+<mat-card class="mainCard">
 
-  <mat-divider></mat-divider>
-
-</mat-accordion>
+  <mat-accordion style="margin: 25px;">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title style="text-align: center;">Inventory Instances</mat-panel-title>
+        <mat-panel-description style="text-align: right; font-style: italic">
+          Create & manage inventory database instances
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div style="justify-content: center;">
+        <button mat-button style="box-shadow: 0px 0px 5px #adb5bd" (click)="createDatabaseInstance()">Create Instance</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+    
+</mat-card>

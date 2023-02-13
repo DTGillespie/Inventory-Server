@@ -2,8 +2,18 @@
 
 /* Card */
 
-.card {
-  height:86%; margin: 20px
+.mainCard {
+  border-radius: 32px;
+  height:87%; margin: 12px
+}
+
+/*
+.mat-card {
+  background-color: #ced4da;
+} */
+
+mat-expansion-panel-header:hover {
+  background-color: black;
 }
 
 /* Menu */

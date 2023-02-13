@@ -34,22 +34,20 @@ export class DashboardComponent implements OnInit{
 
   };
 
-  toggleMenu(): void {
-    this.menu.toggle();
+  toggleSubMenu(): void {
+
   };
 
   routeInventoryView(): void {
     this.resetContentValues();
     this.inventoryButtonElement?.style.setProperty('box-shadow', '0px 0px 10px #adb5bd inset');
     this.router.navigate(['/inventory']);
-    this.toggleMenu();
   };
   
   routeHomeView(): void {
     this.resetContentValues();
     this.homeButtonElement?.style.setProperty('box-shadow', '0px 0px 10px #adb5bd inset');
     this.router.navigate(['/home']);
-    this.toggleMenu();
   };
 
   resetContentValues(): void {

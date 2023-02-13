@@ -1,27 +1,25 @@
 
     
-  <div>
-    <mat-drawer-container class="fit-view grayscale-theme-secondary-light" autosize>
-  
-      <mat-toolbar class="navbar grayscale-theme-primary">
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="toggleMenu()">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <span class="spacer"></span>
-      </mat-toolbar>
-      
-      <mat-drawer #menu class="menu grayscale-theme-primary" mode="side">
-        <div class="menu-content">
-          <mat-list style="padding-bottom:45vh;">
-            <mat-list-item id="homeButtonElement" (click)="routeHomeView()">Home</mat-list-item>
-            <mat-divider class="divider-shadow"></mat-divider>
-            <mat-list-item id="inventoryButtonElement" (click)="routeInventoryView()">Inventory</mat-list-item>
-            <mat-divider class="divider-shadow"></mat-divider>
-          </mat-list >
-        </div>
-      </mat-drawer>
-      
-      <router-outlet></router-outlet>
-  
-    </mat-drawer-container>
-  </div>
+<div>
+  <mat-drawer-container class="fit-view grayscale-theme-secondary-light" autosize>
+
+    <mat-drawer opened class="menu grayscale-theme-primary" mode="side">
+      <div class="menu-content">
+        <mat-list style="padding-bottom:45vh;">
+          <mat-list-item style="text-align: center;" id="homeButtonElement" (click)="routeHomeView()">
+            <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="toggleSubMenu()">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </mat-list-item>
+          <mat-list-item style="text-align: center;" id="homeButtonElement" (click)="routeHomeView()">Home</mat-list-item>
+          <mat-divider class="divider-shadow"></mat-divider>
+          <mat-list-item style="text-align: center;" id="inventoryButtonElement" (click)="routeInventoryView()">Inventory</mat-list-item>
+          <mat-divider class="divider-shadow"></mat-divider>
+        </mat-list >
+      </div>
+    </mat-drawer>
+    
+    <router-outlet></router-outlet>
+
+  </mat-drawer-container>
+</div>

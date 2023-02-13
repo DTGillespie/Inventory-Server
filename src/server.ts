@@ -30,7 +30,7 @@ export class Server {
     Server.defineExtendedRouting(port, app, sequelize);
 
     app.listen(port, () => {
-      console.log(`Frontend listening on port: ${port}`);
+      console.log(`Server listening on port: ${port}\n\r`);
     });
   };
 
@@ -38,11 +38,10 @@ export class Server {
 
     const urlEncodedParser = bodyParser.urlencoded({extended: false});
 
-    // Prototyping Routes
     app
-      //.use(bodyParser.json())
+      .use(bodyParser.json())
 
-      .get('/request/create-table', urlEncodedParser, (req, res) => {
+      .post('/request/create-table', urlEncodedParser, (req, res) => {
 
         console.log(req.body);
         console.log(req.query);
