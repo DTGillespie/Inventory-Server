@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-inventory',
@@ -8,14 +10,15 @@ import { Component, OnInit } from '@angular/core';
 
 export class InventoryComponent implements OnInit{
 
-  constructor() {
+  constructor(private http: HttpClient) {
   };
   
   ngOnInit(): void {
   };
 
-  async createDatabaseInstance(): Promise<any> {
-    
+  createInventoryInstance(): void {
+    let request = this.http.post(`http://localhost:37561/request/create-table`, {tableName: "test_table_1"});
+    request.subscribe();
   };
 
 

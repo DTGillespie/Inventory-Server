@@ -22,9 +22,9 @@ export class Server {
 
     const path = require("path");
     
-    app.use(express.static(`${process.cwd()}/angular-frontend/dist/angular-frontend`));
+    app.use(express.static(`${process.cwd()}/frontend/dist/angular-frontend`));
     app.get('/app/*', (req, res) => {
-      res.sendFile(path.resolve(`${process.cwd()}/angular-frontend/dist/angular-frontend/index.html`));
+      res.sendFile(path.resolve(`${process.cwd()}/frontend/dist/angular-frontend/index.html`));
     });
 
     Server.defineExtendedRouting(port, app, sequelize);
@@ -41,6 +41,8 @@ export class Server {
       .use(bodyParser.urlencoded({extended: false}))
 
       .post('/request/create-table', (req, res) => {
+
+        console.log("POST request /request/create-table");
 
         let data = req.body;
 
