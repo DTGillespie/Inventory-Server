@@ -1,7 +1,7 @@
 import { Sequelize, DataTypes, Model } from "sequelize"; 
 
 export class InventoryInstances extends Model {
-  public static initialize(sequelize: Sequelize) {
+  public static async initialize(sequelize: Sequelize) {
     
     const attributes = {
       id: {
@@ -12,7 +12,8 @@ export class InventoryInstances extends Model {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
       },
       desc: {
         type: DataTypes.STRING,
@@ -20,11 +21,14 @@ export class InventoryInstances extends Model {
       }
     };
 
-    return this.init(attributes, {
+    let model = await this.init(attributes, {
       sequelize,
-      modelName: 'inventoryInstances',
-      underscored: true,
+      modelName: 'inventory_instances',
       freezeTableName: true
     });
+
+    await model.sync();
+
+    return model;
   }
 };

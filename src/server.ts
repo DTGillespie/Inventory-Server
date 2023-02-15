@@ -58,9 +58,10 @@ export class Server {
   };
 
   private async initializeDefaultModels(): Promise<any> {
-    const test = InventoryInstances.initialize(this.sequelize);
+    const test = await InventoryInstances.initialize(this.sequelize);
     test.sync();
     test.create({id: null, name: "test", desc: "test desc"});
   };
 
 };
+
