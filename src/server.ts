@@ -1,94 +1,66 @@
-import { SequelizeInterface } from "./model/sequelizeInterface";
-import { DataTypes, Sequelize } from "sequelize";
+import { SequelizeInterface } from "./sequelizeInterface";
+import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
 import express from "express";
 import { Express } from "express";
 import bodyParser from "body-parser";
 
+// Models
+import { InventoryInstances } from "./models/inventoryInstances";
+
 export class Server {
 
-  public static main(): void {
+  sequelizeInterface: SequelizeInterface;
+  sequelize: Sequelize;
 
-    const port = "37561";
-    const app: Express = express();
-    
-    const sequelizeInterface = SequelizeInterface.getInstance();
-    const sequelize = sequelizeInterface.initializeDatabaseContext();
-    Server.initializeDefaultModels(sequelize);
+  private port: string;
+  private app: Express;
 
-    Server.initializeExpress(port, app, sequelize);
+  constructor () {
+
+    this.sequelizeInterface = SequelizeInterface.getInstance();
+    this.sequelize = this.sequelizeInterface.initializeDatabaseContext();
+
+    this.port = "37561";
+    this.app = express();
+
+    this.initializeDefaultModels();
+    this.initializeExpress();
   };
 
-  private static initializeExpress(port: string, app: Express, sequelize: Sequelize): void {
+  private initializeExpress(): void {
 
     const path = require("path");
     
-    app.use(express.static(`${process.cwd()}/frontend/dist/angular-frontend`));
-    app.get('/app/*', (req, res) => {
+    this.app.use(express.static(`${process.cwd()}/frontend/dist/angular-frontend`));
+    this.app.get('/app/*', (req, res) => {
       res.sendFile(path.resolve(`${process.cwd()}/frontend/dist/angular-frontend/index.html`));
     });
 
-    Server.defineExtendedRouting(port, app, sequelize);
+    this.defineExtendedRouting();
 
-    app.listen(port, () => {
-      console.log(`\nServer listening on port: ${port}\n\r`);
+    this.app.listen(this.port, () => {
+      console.log(`\nServer listening on port: ${this.port}\n\r`);
     });
   };
 
-  private static defineExtendedRouting(port: string, app: Express, sequelize: Sequelize): void {
+  private defineExtendedRouting(): void {
 
-    app
+    this.app
       .use(bodyParser.json())
       .use(bodyParser.urlencoded({extended: false}))
 
-      .post('/request/create-table', (req, res) => {
-
-        console.log("POST request /request/create-table");
+      .post('/request/define-inventory-instance', (req, res) => {
 
         let data = req.body;
 
-        sequelize
-          .define(
-            data.tableName,
-            {
-              "test": {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true
-              }
-            },
-            {
-              freezeTableName: true,
-              underscored: true,
-            }
-          )
-          .sync();
-
-          res.send(`POST request successful`);
+        //this.inventoryInstancesModel.create()
       });
   };
 
-  private static initializeDefaultModels(sequelize: Sequelize): void {
-
-    sequelize
-
-      .define(
-        "inventoryInstances",
-        {
-          id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            autoIncrement: true,
-            primaryKey: true
-          },
-          name: {
-            type: DataTypes.STRING,
-            allowNull: false
-          }
-        }
-      )
-
-      .sync();
+  private async initializeDefaultModels(): Promise<any> {
+    const test = InventoryInstances.initialize(this.sequelize);
+    test.sync();
+    test.create({id: null, name: "test", desc: "test desc"});
   };
 
 };

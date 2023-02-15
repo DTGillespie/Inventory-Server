@@ -1,7 +1,7 @@
 import {Sequelize} from "sequelize";
 import {DatabaseContextManager} from "./databaseContextManager";
 
-import * as config from "../../config.json";
+import * as config from "../config.json";
 
 export class SequelizeInterface {
 
@@ -38,4 +38,8 @@ export class SequelizeInterface {
     
     return this.database;
   };
+
+  public getContext(): Sequelize {
+    return this.database!;
+  }
 };
