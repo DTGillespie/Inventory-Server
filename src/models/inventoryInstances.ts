@@ -24,7 +24,8 @@ export class InventoryInstances extends Model {
     let model = await this.init(attributes, {
       sequelize,
       modelName: 'inventory_instances',
-      freezeTableName: true
+      freezeTableName: true,
+      timestamps: false
     });
 
     await model.sync();

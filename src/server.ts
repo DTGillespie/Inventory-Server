@@ -12,6 +12,8 @@ export class Server {
   sequelizeInterface: SequelizeInterface;
   sequelize: Sequelize;
 
+  private inventoryInstances: any;
+
   private port: string;
   private app: Express;
 
@@ -53,14 +55,18 @@ export class Server {
 
         let data = req.body;
 
-        //this.inventoryInstancesModel.create()
+        this.inventoryInstances.create({
+          id: null,
+          name: data.instanceName,
+          des: data.instanceDescription
+        });
+
+        res.send("Success");
       });
   };
 
   private async initializeDefaultModels(): Promise<any> {
-    const test = await InventoryInstances.initialize(this.sequelize);
-    test.sync();
-    test.create({id: null, name: "test", desc: "test desc"});
+    this.inventoryInstances = await InventoryInstances.initialize(this.sequelize);
   };
 
 };
