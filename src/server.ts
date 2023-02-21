@@ -57,11 +57,15 @@ export class Server {
 
         this.inventoryInstances.create({
           id: null,
-          name: data.instanceName,
-          des: data.instanceDescription
+          name: data.name,
+          desc: data.desc,
         });
 
-        res.send("Success");
+        res.send({success: true});
+      })
+
+      .get(`/request/get-inventory-instances`, async (req, res) => {
+        res.send(await this.inventoryInstances.findAll());
       });
   };
 

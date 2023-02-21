@@ -24,6 +24,7 @@ export class InventoryComponent implements OnInit{
   };
   
   ngOnInit(): void {
+    console.log(this.getRequest_getInventoryInstances());
   };
 
   onClick_createInstance(): void {
@@ -36,17 +37,25 @@ export class InventoryComponent implements OnInit{
     });
 
     dialogRef_createInventoryInstance.afterClosed().subscribe(result => {
-      console.log(`Result: ${JSON.stringify(result)}`);
-      console.log("modal_createInventoryInstance closed");
+
+      let valid = true;
+      for (let property in result) {
+        property == undefined ? valid = false : null; 
+      };
+
+      console.log("INVALID FIELDS IN RESULT");
+
+      this.postRequest_createInventoryInstance(result);
     });
   };
 
-  sendRequest_createInventoryInstance(): Subscription {
-    
-    let request = this.http.post(
-      `http://localhost:37561/request/create-inventory-instance`, 
-      {tableName: "test_table_1"}
-    );
+  private postRequest_createInventoryInstance(data: object): Subscription {
+    let request = this.http.post(`http://localhost:37561/request/define-inventory-instance`, data);
+    return request.subscribe();
+  };
+  
+  private getRequest_getInventoryInstances(): Subscription {
+    let request = this.http.get(`http://localhost:37561/request/get-inventory-instances`);
     return request.subscribe();
   };
 
