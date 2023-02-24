@@ -51,7 +51,7 @@ export class Server {
       .use(bodyParser.json())
       .use(bodyParser.urlencoded({extended: false}))
 
-      .post('/request/define-inventory-instance', (req, res) => {
+      .post('/request/define-inventory-instance', async (req, res) => {
 
         let data = req.body;
 
@@ -61,7 +61,7 @@ export class Server {
           desc: data.desc,
         });
 
-        res.send({success: true});
+        res.send(await this.inventoryInstances.findAll());
       })
 
       .get(`/request/get-inventory-instances`, async (req, res) => {

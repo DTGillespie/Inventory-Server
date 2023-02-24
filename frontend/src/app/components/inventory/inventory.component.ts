@@ -24,7 +24,7 @@ export class InventoryComponent implements OnInit{
   };
   
   ngOnInit(): void {
-    console.log(this.getRequest_getInventoryInstances());
+    this.getRequest_getInventoryInstances();
   };
 
   onClick_createInstance(): void {
@@ -49,14 +49,18 @@ export class InventoryComponent implements OnInit{
     });
   };
 
-  private postRequest_createInventoryInstance(data: object): Subscription {
-    let request = this.http.post(`http://localhost:37561/request/define-inventory-instance`, data);
-    return request.subscribe();
+  private postRequest_createInventoryInstance(data: object): void {
+    this.http.post(`http://localhost:37561/request/define-inventory-instance`, data)
+      .subscribe(result => {
+        console.log(result);
+    });
   };
   
-  private getRequest_getInventoryInstances(): Subscription {
-    let request = this.http.get(`http://localhost:37561/request/get-inventory-instances`);
-    return request.subscribe();
+  private getRequest_getInventoryInstances(): void {
+    this.http.get(`http://localhost:37561/request/get-inventory-instances`)
+      .subscribe(result => {
+        console.log(result);
+    });
   };
 
 }

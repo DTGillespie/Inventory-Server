@@ -41,5 +41,5 @@ export class SequelizeInterface {
 
   public getContext(): Sequelize {
     return this.database!;
-  }
+  };
 };
